@@ -1,0 +1,32 @@
+package com.airplane.planner.participant;
+
+import com.airplane.planner.trip.Trip;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.UUID;
+
+@Entity
+@Table(name = "participants")
+@Data
+@NoArgsConstructor
+public class Participant {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    @Column(name = "is_confirmed", nullable = false)
+    private boolean isConfirmed;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "trip_id", nullable = false)
+    private Trip trip;
+
+}

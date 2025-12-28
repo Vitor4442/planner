@@ -25,4 +25,15 @@ public class ParticipantService {
 
     };
 
+    public void triggerConfirmationEmailToParticipant(String email){
+
+    };
+
+    public ParticipantCreteResponse registerParticipantToEvent(String email, Trip trip){
+        Participant newParticipant = new Participant(email, trip);
+        this.repository.save(newParticipant);
+
+        return new ParticipantCreteResponse(newParticipant.getId());
+    }
+
 }

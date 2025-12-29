@@ -1,4 +1,4 @@
-package com.airplane.planner.activities;
+package com.airplane.planner.activity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

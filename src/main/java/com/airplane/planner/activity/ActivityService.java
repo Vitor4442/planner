@@ -1,6 +1,5 @@
-package com.airplane.planner.activities;
+package com.airplane.planner.activity;
 
-import com.airplane.planner.participant.ParticipantData;
 import com.airplane.planner.trip.Trip;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

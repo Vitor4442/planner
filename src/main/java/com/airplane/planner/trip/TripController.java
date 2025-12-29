@@ -1,6 +1,6 @@
 package com.airplane.planner.trip;
 
-import com.airplane.planner.activities.*;
+import com.airplane.planner.activity.*;
 import com.airplane.planner.participant.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

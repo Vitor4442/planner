@@ -1,11 +1,8 @@
 package com.airplane.planner.link;
 
-import com.airplane.planner.activity.ActivityData;
 import com.airplane.planner.trip.Trip;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,7 +19,7 @@ public class LinkService {
         return new LinkResponse(newLink.getId());
     }
 
-    public List<ActivityData> getAllActivitiesFromId(UUID tripId){
-        return new ArrayList<>();
+    public List<LinkData> getAllLinksFromTrip(UUID tripId){
+        return this.repository.findByTripId(tripId).stream().map(link -> new LinkData(link.getId(), link.getTitle(), link.getUrl())).toList();
     }
 }

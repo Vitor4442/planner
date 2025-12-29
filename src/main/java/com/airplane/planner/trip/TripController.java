@@ -1,6 +1,7 @@
 package com.airplane.planner.trip;
 
 import com.airplane.planner.activity.*;
+import com.airplane.planner.link.LinkData;
 import com.airplane.planner.link.LinkRequestPayload;
 import com.airplane.planner.link.LinkResponse;
 import com.airplane.planner.link.LinkService;
@@ -155,6 +156,14 @@ public class TripController {
 
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/{id}/link")
+    public ResponseEntity<List<LinkData>> getAlllinks(@PathVariable UUID id){
+        List<LinkData> linkDataList = this.linkService.getAllLinksFromTrip(id);
+
+        return ResponseEntity.ok(linkDataList);
+    }
+
 
 
 }

@@ -1,8 +1,6 @@
 package com.airplane.planner.trip;
 
-import com.airplane.planner.activities.ActivityRequestPayload;
-import com.airplane.planner.activities.ActivityResponse;
-import com.airplane.planner.activities.ActivityService;
+import com.airplane.planner.activities.*;
 import com.airplane.planner.participant.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -113,6 +111,14 @@ public class TripController {
 
         return ResponseEntity.ok(participantList);
     }
+
+    @GetMapping("/{id}/activities")
+    public ResponseEntity<List<ActivityData>> getAllActivities(@PathVariable UUID id){
+        List<ActivityData> activityDataList = this.activityService.getAllActivitiesFromId(id);
+
+        return ResponseEntity.ok(activityDataList);
+    }
+
     @PostMapping("/{id}/activities")
     public ResponseEntity<ActivityResponse> registerActivity(@PathVariable UUID id, @RequestBody ActivityRequestPayload payload){
         Optional<Trip> trip = this.repository.findById(id);

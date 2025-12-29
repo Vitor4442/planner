@@ -1,6 +1,9 @@
 package com.airplane.planner.trip;
 
 import com.airplane.planner.activity.*;
+import com.airplane.planner.link.LinkRequestPayload;
+import com.airplane.planner.link.LinkResponse;
+import com.airplane.planner.link.LinkService;
 import com.airplane.planner.participant.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +27,9 @@ public class TripController {
 
     @Autowired
     private TripRepository repository;
+
+    @Autowired
+    private LinkService linkService;
 
     @PostMapping
     public ResponseEntity<TripCreateResponse> createTrip(@RequestBody TripRequestPayload payload){
@@ -129,6 +135,22 @@ public class TripController {
 
 
             return ResponseEntity.ok(activityResponse);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/{id}/link")
+    public ResponseEntity<LinkResponse> registerLink(@PathVariable UUID id, @RequestBody LinkRequestPayload payload){
+        Optional<Trip> trip = this.repository.findById(id);
+
+        if(trip.isPresent()){
+            Trip rawTrip = trip.get();
+
+            LinkResponse linkResponse = this.linkService.registerLink(payload, rawTrip);
+
+
+            return ResponseEntity.ok(linkResponse);
         }
 
         return ResponseEntity.notFound().build();

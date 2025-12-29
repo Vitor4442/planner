@@ -22,13 +22,16 @@ public class Link {
     @Column(nullable = false)
     private String title;
 
-    @Column(name = "occurs_at", nullable = false)
-    private LocalDateTime occursAt;
-
     @Column(nullable = false)
     private String url;
 
     @ManyToOne
     @JoinColumn(name = "trip_id", nullable = false)
     private Trip trip;
+
+    public Link(String title, String url, Trip trip){
+        this.title = title;
+        this.url = url;
+        this.trip = trip;
+    }
 }

@@ -36,6 +36,21 @@ public class TripController {
     public ResponseEntity<TripCreateResponse> createTrip(@RequestBody TripRequestPayload payload){
         Trip newTrip = new Trip(payload);
 
+        LocalDateTime start = LocalDateTime.parse(
+                payload.starts_at(),
+                DateTimeFormatter.ISO_DATE_TIME
+        );
+        LocalDateTime end  = LocalDateTime.parse(
+                payload.ends_at(),
+                DateTimeFormatter.ISO_DATE_TIME
+        );
+
+        if (!start.isBefore(end)) {
+            return ResponseEntity
+                    .badRequest()
+                    .build();
+        }
+
         this.repository.save(newTrip);
 
         this.participantService.registerParticipantsToEvent(payload.emails_to_invite(), newTrip);
